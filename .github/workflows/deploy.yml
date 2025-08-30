@@ -41,6 +41,11 @@ jobs:
             exit 1
           fi
 
+      - name: List out directory contents
+        run: |
+          echo "Contents of out directory:"
+          ls -la out/
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
