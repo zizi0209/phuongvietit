@@ -27,58 +27,34 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Print platform (debug)
-        run: |
-          node -p "process.platform + ' ' + process.arch"
-          uname -a
-
       - name: Install deps (clean)
         run: npm ci
 
-      # Đảm bảo toolchain Tailwind v4 + lightningcss + Oxide native cho linux-x64-gnu
-      - name: Ensure Tailwind v4 native deps
+      # ÉP cài đúng binary native cho Linux + pin phiên bản để tránh lệch
+      - name: Pin and install Tailwind v4 native toolchain
         run: |
-          # lightningcss (native)
-          npm ls lightningcss >/dev/null 2>&1 || npm i -D lightningcss
+          # Pin versions (bạn có thể điều chỉnh, nhưng 1.25.x hiện rất phổ biến)
+          npm i -D @tailwindcss/oxide@^4 @tailwindcss/postcss@^4 lightningcss@^1.25.1 lightningcss-linux-x64-gnu@^1.25.1
+          # Rebuild để link đúng binary
           npm rebuild lightningcss
 
-          # Oxide core + gói platform-specific cho Linux x64 GNU
-          npm ls @tailwindcss/oxide >/dev/null 2>&1 || npm i -D @tailwindcss/oxide
-          npm ls @tailwindcss/oxide-linux-x64-gnu >/dev/null 2>&1 || npm i -D @tailwindcss/oxide-linux-x64-gnu
-
-      # Thử require Oxide native, nếu fail -> fallback WASM
-      - name: Probe @tailwindcss/oxide native
-        id: probe_oxide
+      - name: Probe native bindings (debug)
         run: |
-          node -e "try{require('@tailwindcss/oxide');console.log('✅ oxide native OK')}catch(e){console.error('❌ oxide native failed');process.exit(1)}"
-        continue-on-error: true
+          node -e "require('@tailwindcss/oxide'); console.log('✅ oxide native OK')"
+          node -e "require('lightningcss'); console.log('✅ lightningcss native OK')"
 
-      - name: Fallback Oxide to WASM (if needed)
-        if: steps.probe_oxide.outcome == 'failure'
-        run: |
-          echo "Using Oxide WASM fallback"
-          npm i -D @tailwindcss/oxide-wasm
-          # Biến môi trường (cho các step sau) để ép dùng WASM thay vì native
-          echo "TAILWIND_DISABLE_OXIDE=1" >> $GITHUB_ENV
-
-      # (tuỳ) probe lightningcss lại; nếu fail có thể fallback sang WASM của lightningcss
-      - name: Probe lightningcss native
-        id: probe_lc
-        run: |
-          node -e "try{require('lightningcss');console.log('✅ lightningcss native OK')}catch(e){console.error('❌ lightningcss native failed');process.exit(1)}"
-        continue-on-error: true
-
-      - name: Fallback lightningcss to WASM (if needed)
-        if: steps.probe_lc.outcome == 'failure'
-        run: |
-          npm i -D lightningcss-wasm
-          echo "LIGHTNINGCSS_FORCE_WASM=1" >> $GITHUB_ENV
+      # (Tùy chọn) Nếu muốn fallback WASM khi native lỗi, bỏ comment 2 step dưới:
+      # - name: Fallback to WASM (if needed)
+      #   if: failure()
+      #   run: |
+      #     npm i -D lightningcss-wasm @tailwindcss/oxide-wasm
+      #     echo 'LIGHTNINGCSS_FORCE_WASM=1' >> $GITHUB_ENV
+      #     echo 'TAILWIND_DISABLE_OXIDE=1' >> $GITHUB_ENV
 
       - name: Build (Next export -> out/)
         run: npm run build
         env:
-          # Giữ target env cho lightningcss; nếu ở trên bật FORCE_WASM/TAILWIND_DISABLE_OXIDE
-          # thì chúng đã có trong $GITHUB_ENV rồi.
+          # Giữ target env cho lightningcss
           LIGHTNINGCSS_TARGET_ENV: nodejs
 
       - name: Verify out/
