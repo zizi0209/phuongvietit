@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+//import Image from "next/image";
+import AppImage from "@/components/AppImage";
 
 const AboutSection = () => {
   const slides = [
@@ -136,7 +137,7 @@ const AboutSection = () => {
                   style={{ opacity: i === index ? 1 : 0 }}
                   onClick={() => setZoomIndex(i)}
                 >
-                  <Image
+                  <AppImage
                     src={img.src}
                     alt={img.alt}
                     fill
@@ -177,7 +178,7 @@ const AboutSection = () => {
             onClick={(e) => e.stopPropagation()} // chặn overlay phía sau
           >
             {/* Ảnh phóng to */}
-            <Image
+            <AppImage
               src={slides[zoomIndex].src}
               alt={slides[zoomIndex].alt}
               width={1600}

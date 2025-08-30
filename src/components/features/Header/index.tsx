@@ -1,5 +1,6 @@
 import React from "react";
-import Image from "next/image";
+//import Image from "next/image";
+import AppImage from "@/components/AppImage";
 
 const Header = () => (
   <header
@@ -14,7 +15,7 @@ const Header = () => (
   >
     <nav className="container mx-auto px-6 h-20 flex justify-between items-center">
       <div className="flex items-center">
-        <Image
+        <AppImage
           src="/logo.png"
           alt="Phương Việt Logo"
           width={80}
