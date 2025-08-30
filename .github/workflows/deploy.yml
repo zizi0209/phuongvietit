@@ -1,7 +1,8 @@
 name: Deploy Next.js to GitHub Pages
+
 on:
   push:
-    branches: [master]   # hoặc main, tuỳ repo
+    branches: [master]  # đổi thành main nếu repo dùng main
   workflow_dispatch:
 
 permissions:
@@ -17,14 +18,35 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-      - run: npm ci
-      - run: npm run build         # Next (output:'export') sẽ tạo thư mục out/
-      - uses: actions/upload-pages-artifact@v3
+
+      - name: Install deps (clean)
+        run: npm ci
+
+      # Đảm bảo 2 gói native có mặt (nếu thiếu sẽ cài), rồi rebuild cho linux-x64-gnu
+      - name: Ensure lightningcss & oxide
+        run: |
+          npm ls lightningcss >/dev/null 2>&1 || npm i -D lightningcss
+          npm ls @tailwindcss/oxide >/dev/null 2>&1 || npm i -D @tailwindcss/oxide
+          npm rebuild lightningcss
+
+      - name: Build (Next export -> out/)
+        run: npm run build
+        env:
+          LIGHTNINGCSS_TARGET_ENV: nodejs
+
+      - name: Verify out/
+        run: test -d out && ls -la out
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
 
