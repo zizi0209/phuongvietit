@@ -2,7 +2,7 @@ name: Deploy Next.js to GitHub Pages
 
 on:
   push:
-    branches: [master]  # đổi thành main nếu repo dùng main
+    branches: [master]   # đổi thành main nếu repo dùng main
   workflow_dispatch:
 
 permissions:
@@ -27,19 +27,44 @@ jobs:
           node-version: 20
           cache: npm
 
+      - name: Print platform (debug)
+        run: |
+          node -p "process.platform + ' ' + process.arch"
+          lsb_release -a || true
+          uname -a
+
       - name: Install deps (clean)
         run: npm ci
 
-      # Đảm bảo 2 gói native có mặt (nếu thiếu sẽ cài), rồi rebuild cho linux-x64-gnu
-      - name: Ensure lightningcss & oxide
+      # Đảm bảo có tailwind v4 toolchain + lightningcss native cho linux-x64-gnu
+      - name: Ensure Tailwind v4 toolchain
         run: |
-          npm ls lightningcss >/dev/null 2>&1 || npm i -D lightningcss
           npm ls @tailwindcss/oxide >/dev/null 2>&1 || npm i -D @tailwindcss/oxide
+          npm ls lightningcss >/dev/null 2>&1 || npm i -D lightningcss
+          # Cài gói nhị phân theo nền tảng (tránh miss optional deps)
+          npm ls lightningcss-linux-x64-gnu >/dev/null 2>&1 || npm i -D lightningcss-linux-x64-gnu
+          # Rebuild để link đúng binary trên Linux
           npm rebuild lightningcss
+
+      - name: Probe lightningcss native (debug)
+        run: |
+          node -e "try{require('lightningcss');console.log('✅ lightningcss native OK')}catch(e){console.error('❌ lightningcss native failed');process.exit(1)}"
+        continue-on-error: true
+        id: probe_native
+
+      # Nếu native fail, fallback sang WASM
+      - name: Fallback to WASM (if needed)
+        if: steps.probe_native.outcome == 'failure'
+        run: |
+          echo "Using WASM fallback for lightningcss"
+          npm i -D lightningcss-wasm
+          # Bật env để Next/Tailwind dùng WASM thay vì native
+          echo "LIGHTNINGCSS_FORCE_WASM=1" >> $GITHUB_ENV
 
       - name: Build (Next export -> out/)
         run: npm run build
         env:
+          # Nếu step trước đặt FORCE_WASM thì sẽ có biến môi trường trong $GITHUB_ENV
           LIGHTNINGCSS_TARGET_ENV: nodejs
 
       - name: Verify out/
