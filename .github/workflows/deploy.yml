@@ -31,6 +31,14 @@ jobs:
         env:
           LIGHTNINGCSS_TARGET_ENV: nodejs
 
+      - name: Check if out directory exists
+        run: |
+          if [ ! -d "out" ]; then
+            echo "Error: 'out' directory does not exist after build"
+            ls -la
+            exit 1
+          fi
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
