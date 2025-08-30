@@ -1,0 +1,99 @@
+/* ===========================
+   Tokens (màu, radius, spacing)
+   =========================== */
+:root {
+  --pv-green-1: #2ecc71;
+  --pv-green-2: #27ae60;
+  --pv-green-3: #14532d;
+  --pv-accent:  #3fa548;
+
+  --radius-pill: 1.5rem;
+  --shadow-md:  0 6px 16px rgba(0,0,0,0.25);
+
+  /* Biên độ sóng của wave (giảm chút ở mobile bên dưới) */
+  --wave-amp: 18px;
+}
+
+/* Mobile ưu tiên: biên độ sóng nhỏ để đỡ “nhảy” */
+@media (max-width: 767.98px) {
+  :root { --wave-amp: 12px; }
+}
+
+/* ===========================
+   Gradient text an toàn Safari/iOS
+   =========================== */
+.gradient-text {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--pv-green-1), var(--pv-green-2), var(--pv-green-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  /* tránh bẻ dòng chữ PV-ERP trên mobile */
+  white-space: nowrap;
+}
+
+/* ===========================
+   Highlight nền xanh (dùng khi cần)
+   - Responsive bằng clamp: tự co dãn theo viewport
+   =========================== */
+.highlight-text {
+  display: inline-block;
+  background: color-mix(in srgb, var(--pv-accent) 85%, transparent); /* fallback: rgba(63,165,72,.85) */
+  color: #fff;
+  font-weight: 800;
+  /* cỡ chữ tự co: min 16px, max 48px (tùy viewport) */
+  font-size: clamp(1rem, 2.5vw + 0.25rem, 3rem);
+  line-height: 1.3;
+  padding: clamp(0.5rem, 1.2vw, 1.25rem) clamp(1rem, 2.5vw, 2.5rem);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
+  margin-top: 1.5rem;
+}
+
+/* ===========================
+   Wave text
+   - Span kế thừa size từ h1 để Tailwind điều khiển responsive
+   - Child(1) đứng yên + có khoảng cách dưới
+   - Stagger delay cho các ký tự tiếp theo
+   =========================== */
+.wave-text span {
+  display: inline-block;
+  font-size: inherit;               /* Quan trọng: cho phép Tailwind quyết định size */
+  animation: wave 30s ease-in-out infinite;
+}
+
+.wave-text span:nth-child(1) {
+  animation: none;            /* khoảng cách dưới riêng cho ký tự đầu */
+}
+
+/* Stagger delay rõ ràng cho các ký tự sau (2→6) */
+.wave-text span:nth-child(2) { animation-delay: 0.15s; }
+.wave-text span:nth-child(3) { animation-delay: 0.30s; }
+.wave-text span:nth-child(4) { animation-delay: 0.45s; }
+.wave-text span:nth-child(5) { animation-delay: 0.60s; }
+.wave-text span:nth-child(6) { animation-delay: 0.75s; }
+
+/* Tắt animation nếu người dùng chọn giảm chuyển động (accessibility) */
+@media (prefers-reduced-motion: reduce) {
+  .wave-text span { animation: none !important; }
+}
+
+/* Keyframes dùng biên độ sóng theo biến */
+@keyframes wave {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(calc(var(--wave-amp) * -1)); }
+}
+
+
+// responsive
+/* Font to hơn ở mobile, nhỏ lại dần khi viewport lớn */
+.text-fluid-invert {
+  /* mobile nhỏ (min) → desktop lớn (max) */
+  font-size: clamp(3.3rem, 1.1rem + 2.2vw, 4rem);
+}
+
+.subtext-fluid-invert {
+  /* min 1rem (desktop), max 1.5rem (mobile) */
+  font-size: clamp(1rem, 1.5rem - 0.4vw, 1.5rem);
+}

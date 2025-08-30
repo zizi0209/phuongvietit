@@ -1,0 +1,34 @@
+/* style.css */
+
+/* ===== Solutions Section ===== */
+#solutions h2 {
+  font-size: 2.25rem;          /* ~text-4xl */
+  font-weight: 800;            /* font-extrabold */
+  color: #2F3542;              /* xám đậm */
+  line-height: 1.2;            /* leading-tight */
+}
+
+@media (min-width: 768px) {
+  #solutions h2 {
+    font-size: 3rem;           /* ~text-5xl */
+  }
+}
+
+/* Card styling */
+#solutions .shadow-md {
+  border: 1px solid #e5e7eb;   /* viền xám nhạt */
+  border-radius: 0.75rem;      /* bo góc đẹp */
+  transition: all 0.3s ease;
+  background: #f9fafb;         /* nền dịu hơn một chút */
+}
+
+#solutions .shadow-md:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+  background: #ffffff;         /* hover sang nền trắng tinh */
+}
+
+/* Chữ mô tả */
+#solutions p {
+  line-height: 1.7;
+}

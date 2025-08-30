@@ -1,0 +1,134 @@
+/* ===== CTA — Form mẫu hiện đại, 1 cột, 1 nút ===== */
+
+/* Nền section dịu + pattern */
+#cta {
+  background: radial-gradient(
+      1200px 600px at 10% -10%,
+      rgba(255, 255, 255, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 110% 10%,
+      rgba(255, 255, 255, 0.16),
+      transparent 60%
+    ),
+    #3fa548;
+}
+
+/* Tiêu đề */
+
+
+
+/* Card form */
+#cta .max-w-2xl {
+  text-align: left !important;
+  position: relative;
+  border: 1px solid #e8eef1;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(16, 24, 40, 0.02);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#cta .max-w-2xl:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(16, 24, 40, 0.02);
+}
+/* Strip màu trên đầu card */
+#cta .max-w-2xl::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background: linear-gradient(90deg, #3fa548, #2f8f3b);
+}
+
+/* Lưới input => ép 1 cột thẳng */
+#cta form .grid {
+  display: grid;
+  grid-template-columns: 1fr !important; /* ghi đè md:grid-cols-2 */
+  gap: 18px !important;
+  margin-bottom: 1rem;
+}
+#cta form .grid::after {
+  content: none !important;
+} /* nếu có đường chia cột thì tắt */
+
+/* Label & input */
+#cta label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #344054;
+}
+#cta input {
+  height: 48px;
+  border: 1px solid #d1dae0;
+  border-radius: 12px;
+  padding: 0 12px;
+  background: #fff;
+  color: #111927;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+#cta input::placeholder {
+  color: #98a2b3;
+}
+#cta input:hover {
+  border-color: #b6c2c9;
+}
+#cta input:focus {
+  outline: none;
+  border-color: #3fa548;
+  box-shadow: 0 0 0 4px rgba(63, 165, 72, 0.18);
+}
+
+/* Nhóm nút: chỉ để lại 1 nút Liên hệ tư vấn ngay */
+#cta button[type="submit"] {
+  display: none !important;
+} /* ẩn nút “Đăng ký Demo” */
+
+/* Style nút còn lại thành primary */
+#cta button[type="button"] {
+  background: linear-gradient(135deg, #3fa548 0%, #2f8f3b 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 999px;
+  min-height: 52px;
+  padding: 0.9rem 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  box-shadow: 0 10px 20px rgba(63, 165, 72, 0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.2s ease;
+}
+#cta button[type="button"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(63, 165, 72, 0.26);
+  filter: brightness(1.02);
+}
+#cta button[type="button"]:active {
+  transform: translateY(0);
+}
+
+/* Mobile: nút full width cho cảm giác form “mẫu” */
+@media (max-width: 639.98px) {
+  #cta .flex {
+    flex-direction: column;
+  }
+  #cta .flex > button {
+    width: 100%;
+  }
+}
+
+/*  */
+/* Đặt ở cuối style.css */
+#cta .cta-h2 {
+  color: #3fa548 !important;          /* xanh lá */
+  font-size: 1.2rem !important;       /* nhỏ hơn */
+  line-height: 1.25 !important;
+  letter-spacing: -0.01em !important;
+}
+
+@media (min-width: 768px) {
+  #cta .cta-h2 {
+    font-size: 1.8rem !important;
+  }
+}

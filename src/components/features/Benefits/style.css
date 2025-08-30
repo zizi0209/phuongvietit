@@ -1,0 +1,36 @@
+/* ===== Benefits Section ===== */
+#benefits h2 {
+  font-size: 2.25rem;          /* ~text-4xl */
+  font-weight: 800;            /* font-extrabold */
+  color: #2F3542;              /* xám đậm */
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  #benefits h2 {
+    font-size: 3rem;           /* ~text-5xl */
+  }
+}
+
+/* Card styling */
+#benefits .shadow-md {
+  border: 1px solid #f0f0f0;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease, transform 0.3s ease;
+  background: #ffffff;
+}
+
+#benefits .shadow-md:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+
+/* Card title */
+#benefits h3 {
+  color: #3fa548;    /* giữ màu xanh làm điểm nhấn */
+}
+
+/* Card description */
+#benefits p {
+  line-height: 1.6;
+}

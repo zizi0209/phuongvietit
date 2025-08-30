@@ -1,52 +1,51 @@
 import React from "react";
+import { withBasePath } from "@/lib/basePath";
+import "./style.scss";
+import AppImage from "@/components/AppImage";
 
 const HeroSection = () => (
-  <section className="relative bg-white pt-32 pb-28 md:pt-40 md:pb-36 text-center overflow-hidden">
-    <div className="container mx-auto px-6 relative z-10">
-      {/* Sub-heading */}
-      <span className="text-sm md:text-base font-semibold tracking-wider uppercase text-[#3fa548]">
-        Giải pháp công nghệ cho doanh nghiệp
-      </span>
+  <section className="relative py-25 md:py-34">
+    <div className="container mx-auto px-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+        {/* LEFT: Title + copy */}
+        <div className="text-left">
+          <h1 className="wave-text font-extrabold leading-snug text-fluid-invert">
+            <span className="gradient-text">PV-ERP</span>
+            <span className="block text-[#2F3542] subtext-fluid-invert mt-2">
+              Nền tảng quản trị thông minh
+            </span>
+            <span className="block text-[#2F3542] subtext-fluid-invert">
+              cho doanh nghiệp thời đại số
+            </span>
+          </h1>
+          <p className="mt-3 text-base md:text-lg text-gray-600 max-w-2xl leading-snug italic">
+            Kết nối – Đồng hành – Phát triển bền vững
+          </p>
 
-      {/* Main heading */}
-      <h1 className="mt-4 text-4xl md:text-6xl lg:text-7xl font-extrabold text-[#2F3542] leading-tight">
-        Chuyển đổi số thông minh với{" "}
-        <span className="text-[#3fa548]">ERP Odoo</span>
-      </h1>
+          <div className="mt-5 flex gap-4">
+            <a
+              href="#contact"
+              className="bg-[#3fa548] text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform shadow-lg hover:shadow-xl"
+            >
+              Liên hệ tư vấn
+            </a>
+          </div>
+        </div>
 
-      {/* Supporting text */}
-      <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        Chúng tôi cung cấp các giải pháp ERP toàn diện trên nền tảng Odoo, giúp
-        doanh nghiệp của bạn{" "}
-        <span className="font-semibold text-[#3fa548]">tối ưu vận hành</span>,
-        <span className="font-semibold text-[#3fa548]"> tiết kiệm chi phí</span>{" "}
-        và
-        <span className="font-semibold text-[#3fa548]">
-          {" "}
-          tăng trưởng bền vững
-        </span>
-        .
-      </p>
-
-      {/* Call to Action */}
-      <div className="mt-10 flex justify-center gap-4 flex-wrap">
-        <a
-          href="#contact"
-          className="bg-[#3fa548] text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-gradient-to-r from-[#34a03e] to-[#3fa548] transition-transform transform hover:scale-105 shadow-lg hover:shadow-xl"
-        >
-          Nhận tư vấn miễn phí
-        </a>
-        <a
-          href="#about"
-          className="border-2 border-[#3fa548] text-[#3fa548] px-10 py-4 rounded-full text-lg font-bold hover:bg-[#3fa548] hover:text-white transition-all duration-300"
-        >
-          Tìm hiểu thêm
-        </a>
+        {/* RIGHT: Image */}
+        <div className="relative">
+          <div className="rounded-2xl overflow-hidden shadow-2xl ring-1 ring-black/5">
+            <AppImage
+              src={withBasePath("/herobg.png")}
+              alt="Hero"
+              width={1200}
+              height={800}
+              className="w-full h-[calc(50vh-20px)] md:h-[70vh] lg:h-[70vh] object-cover object-[75%_66%]"
+            />
+          </div>
+        </div>
       </div>
     </div>
-
-    {/* Background decoration */}
-    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#c9da2a]/10 via-white to-white -z-10"></div>
   </section>
 );
 

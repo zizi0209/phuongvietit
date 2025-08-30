@@ -1,0 +1,48 @@
+/* ===== Industries Section ===== */
+#industries h2 {
+  font-size: 2.25rem;          /* ~text-4xl */
+  font-weight: 800;            /* font-extrabold */
+  color: #2F3542;              /* xám đậm */
+  line-height: 1.2;            /* leading-tight */
+}
+
+@media (min-width: 768px) {
+  #industries h2 {
+    font-size: 3rem;           /* ~text-5xl */
+  }
+}
+
+/* Card styling */
+#industries .shadow-md {
+  border: 1px solid #f0f0f0;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease, transform 0.3s ease;
+  background: #f9fafb;         /* nền nhạt */
+  text-align: center;
+}
+
+#industries .shadow-md:hover {
+  transform: translateY(-6px);
+  background: #ffffff;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+
+/* Icon */
+#industries .text-4xl {
+  font-size: 2.5rem;  /* hơi lớn hơn */
+  color: #3fa548;     /* xanh chủ đạo */
+  transition: transform 0.3s ease;
+}
+
+#industries .shadow-md:hover .text-4xl {
+  transform: scale(1.15) rotate(-3deg);
+}
+
+/* Title & Description */
+#industries h3 {
+  color: #2F3542;
+}
+
+#industries p {
+  line-height: 1.6;
+}

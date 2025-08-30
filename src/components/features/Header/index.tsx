@@ -25,28 +25,58 @@ const Header = () => (
       </div>
 
       <ul className="hidden md:flex items-center space-x-8 font-semibold">
+        {/* Giới thiệu */}
         <li>
           <a
             href="#"
             className="py-2 border-b-2 border-transparent text-[#358e3d] hover:text-[#c9da2a] hover:border-[#c9da2a] transition-all duration-300"
           >
-            Trang chủ
-          </a>
-        </li>
-        <li>
-          <a
-            href="#services"
-            className="py-2 border-b-2 border-transparent text-[#358e3d] hover:text-[#c9da2a] hover:border-[#c9da2a] transition-all duration-300"
-          >
-            Dịch vụ
-          </a>
-        </li>
-        <li>
-          <a
-            href="#about"
-            className="py-2 border-b-2 border-transparent text-[#358e3d] hover:text-[#c9da2a] hover:border-[#c9da2a] transition-all duration-300"
-          >
             Giới thiệu
+          </a>
+        </li>
+        {/* Đặt vấn đề */}
+        <li>
+          <a
+            href="#issues"
+            className="py-2 border-b-2 border-transparent text-[#358e3d] hover:text-[#c9da2a] hover:border-[#c9da2a] transition-all duration-300"
+          >
+            Đặt vấn đề
+          </a>
+        </li>
+        {/* Giải pháp */}
+        <li>
+          <a
+            href="#solutions"
+            className="py-2 border-b-2 border-transparent text-[#358e3d] hover:text-[#c9da2a] hover:border-[#c9da2a] transition-all duration-300"
+          >
+            Giải pháp
+          </a>
+        </li>
+        {/* Chức năng */}
+        <li>
+          <a
+            href="#features"
+            className="py-2 border-b-2 border-transparent text-[#358e3d] hover:text-[#c9da2a] hover:border-[#c9da2a] transition-all duration-300"
+          >
+            Chức năng
+          </a>
+        </li>
+        {/* Tính năng */}
+        <li>
+          <a
+            href="#industries"
+            className="py-2 border-b-2 border-transparent text-[#358e3d] hover:text-[#c9da2a] hover:border-[#c9da2a] transition-all duration-300"
+          >
+            Tính năng
+          </a>
+        </li>
+        {/* Lợi ích */}
+        <li>
+          <a
+            href="#benefits"
+            className="py-2 border-b-2 border-transparent text-[#358e3d] hover:text-[#c9da2a] hover:border-[#c9da2a] transition-all duration-300"
+          >
+            Lợi ích
           </a>
         </li>
       </ul>

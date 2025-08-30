@@ -1,0 +1,47 @@
+/* style.css */
+
+/* ===== Features Section ===== */
+#features h2 {
+  font-size: 2.25rem;           /* ~text-4xl */
+  font-weight: 800;             /* font-extrabold */
+  color: #2F3542;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  #features h2 {
+    font-size: 3rem;            /* ~text-5xl */
+  }
+}
+
+/* Card styling */
+#features .shadow-md {
+  border: 1px solid #f0f0f0;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease, transform 0.3s ease;
+}
+
+#features .shadow-md:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Icon */
+#features .text-3xl {
+  font-size: 2.25rem; /* lớn hơn mặc định chút */
+  color: #3fa548;     /* xanh điểm nhấn */
+  transition: transform 0.3s ease;
+}
+
+#features .shadow-md:hover .text-3xl {
+  transform: scale(1.15) rotate(-3deg);
+}
+
+/* Title & Description */
+#features h3 {
+  color: #2F3542;
+}
+
+#features p {
+  line-height: 1.6;
+}

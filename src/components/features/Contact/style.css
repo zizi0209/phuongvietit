@@ -1,0 +1,127 @@
+/* ===== 2 cột: Timeline trái — Form phải ===== */
+.erp-two-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+  /* gom nền cho đồng bộ */
+  background: linear-gradient(to bottom, #ffffff 0%, #f9fafb 100%);
+  padding-block: 2rem; /* bù khi bỏ padding trong mỗi section */
+}
+
+/* Desktop: chia 2 cột */
+@media (min-width: 1024px) {
+  .erp-two-col {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+/* Bỏ nền xanh của CTA khi đặt chung cột, giữ text trắng ở nút */
+.erp-two-col #cta {
+  background: transparent !important;
+  color: inherit;
+  padding: 0 !important; /* vì đã có padding của .erp-two-col */
+}
+
+/* Bỏ margin auto cố định ở form để full-width theo cột */
+.erp-two-col #cta .container {
+  padding: 0 !important;
+}
+.erp-two-col #cta .container > .max-w-2xl {
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Làm form nổi khối + sticky nhẹ để người dùng dễ thao tác */
+@media (min-width: 1024px) {
+  .erp-two-col #cta .max-w-2xl {
+    position: sticky;
+    top: 96px; /* tuỳ chiều cao header */
+  }
+}
+
+/* Tinh chỉnh hộp form */
+.erp-two-col #cta .max-w-2xl {
+  border: 1px solid #eef2f4;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+  border-radius: 16px;
+}
+
+/* Cột timeline: bỏ padding block riêng vì đã do .erp-two-col quản */
+.erp-two-col #deployment {
+  padding: 0 !important;
+}
+
+/* Tiêu đề đồng bộ */
+.erp-two-col #deployment h2,
+.erp-two-col #cta h2 {
+  font-size: 2.25rem;      /* ~text-4xl */
+  font-weight: 800;        /* extrabold */
+  color: #2F3542;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 768px) {
+  .erp-two-col #deployment h2,
+  .erp-two-col #cta h2 {
+    font-size: 3rem;       /* ~text-5xl */
+  }
+}
+
+/* Nới rộng nội dung trong container của 2 section cho khớp lưới */
+.erp-two-col #deployment .container,
+.erp-two-col #cta .container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Timeline giữ style infographic đã làm ở trước, nhưng canh lề đẹp hơn trong lưới */
+.erp-two-col #deployment .space-y-8 {
+  margin-left: 0.25rem;
+}
+.erp-two-col #deployment .space-y-8::before {
+  left: 1.25rem; /* trục timeline khớp tâm badge */
+}
+
+/* Khoảng cách tổng thể hai cột trên mobile */
+@media (max-width: 1023.98px) {
+  .erp-two-col {
+    padding-inline: 1rem;
+  }
+}
+
+/* Nhấn nút trong form khi hover (đã có sẵn class Tailwind, đây bổ sung tinh tế) */
+.erp-two-col #cta button {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.erp-two-col #cta button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+}
+
+/*  */
+/* ===== Mở rộng nền trắng của erp-two-col ra sát mép màn hình ===== */
+#contact .erp-two-col {
+  /* phá khung container để full-bleed */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  /* đệm hai bên để nội dung không dính mép */
+  padding-left: clamp(16px, 5vw, 48px);
+  padding-right: clamp(16px, 5vw, 48px);
+
+  /* tùy chọn: bỏ bo góc khi full-bleed */
+  border-radius: 0;
+}
+
+/* Trên màn hình rất rộng, giới hạn lại để dễ đọc */
+@media (min-width: 1280px) {
+  #contact .erp-two-col {
+    max-width: 1536px;   /* bạn có thể đổi 1440/1600 tuỳ ý */
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 16px; /* trả lại bo góc nếu thích */
+  }
+}
