@@ -38,8 +38,7 @@ export default function LandingPage() {
       <SectionAnchor id="lien-he" />
       <QuickCTASection />
 
-      
-      <ContactForm />
+      {/* <ContactForm /> */}
       <ContactInfo />
     </>
   );
