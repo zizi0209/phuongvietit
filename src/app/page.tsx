@@ -9,6 +9,7 @@ import BenefitsSection from "@/components/sections/BenefitsSection";
 import QuickCTASection from "@/components/sections/QuickCTASection";
 import ContactForm from "@/components/sections/ContactForm";
 import ContactInfo from "@/components/sections/ContactInfo";
+import ImplementationTimelineSection from "@/components/sections/ImplementationTimelineSection";
 
 export default function LandingPage() {
   return (
@@ -32,8 +33,12 @@ export default function LandingPage() {
       <SectionAnchor id="loi-ich" />
       <BenefitsSection />
 
+      <ImplementationTimelineSection/>
+
       <SectionAnchor id="lien-he" />
       <QuickCTASection />
+
+      
       <ContactForm />
       <ContactInfo />
     </>
