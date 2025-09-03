@@ -140,7 +140,9 @@ function ActivePainPanel({
 
         <div className="mt-5 overflow-hidden rounded-xl border bg-white/60">
           <div className="aspect-[16/9]">
-            <img
+            <Image
+            width={1920}
+            height={1080}
               src={item.media.src}
               alt={item.media.alt}
               className="h-full w-full object-cover"
