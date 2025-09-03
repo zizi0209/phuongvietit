@@ -366,3 +366,44 @@ html { scroll-behavior: smooth; }
       color-mix(in oklab, var(--brand-green) 14%, transparent) 0, transparent 64%),
     oklch(0.985 0 0);
 }
+
+/* Painting riêng cho KeyFeatures (dịu, sang) */
+.industry-surface{
+  position: relative;
+  background:
+    radial-gradient(1100px 520px at 115% -10%, color-mix(in oklab, var(--brand-lime) 18%, transparent) 0, transparent 62%),
+    radial-gradient(1000px 600px at -12% 118%, color-mix(in oklab, var(--brand-green) 14%, transparent) 0, transparent 64%),
+    var(--background);
+}
+
+/* Gears rotate */
+@keyframes pv-rotate { from{ transform: rotate(0) } to{ transform: rotate(360deg) } }
+.gear { animation: pv-rotate 12s linear infinite; transform-origin: 50% 50%; }
+.gear-rev { animation-direction: reverse; animation-duration: 9s; }
+
+/* (đã có trong các section trước)
+   .chart-bars rect { transform-origin: bottom; animation: pv-barwave 3s ease-in-out infinite; }
+   .spark-line path { animation: pv-draw 2.4s ease-in-out .2s both alternate infinite; }
+*/
+
+/* Painting riêng cho Benefits (mảng xanh/lime dịu) */
+.benefits-surface{
+  position: relative;
+  background:
+    radial-gradient(1100px 520px at 120% -10%, color-mix(in oklab, var(--brand-lime) 16%, transparent) 0, transparent 62%),
+    radial-gradient(1000px 600px at -12% 118%, color-mix(in oklab, var(--brand-green) 12%, transparent) 0, transparent 64%),
+    var(--background);
+}
+
+/* Rise cho cột “mở rộng” */
+@keyframes pv-rise { from { transform: scaleY(.35) } to { transform: scaleY(.95) } }
+.stack-rise rect { transform-origin: bottom; fill: color-mix(in oklab, var(--brand-green) 78%, white 22%); animation: pv-rise 2.2s ease-in-out infinite alternate; }
+.stack-rise rect:nth-child(2){ animation-delay:.12s }
+.stack-rise rect:nth-child(3){ animation-delay:.24s }
+.stack-rise rect:nth-child(4){ animation-delay:.36s }
+.stack-rise rect:nth-child(5){ animation-delay:.48s }
+
+/* (đã dùng lại từ trước)
+   .chart-bars rect { transform-origin: bottom; fill: color-mix(in oklab, var(--brand-green) 78%, white 22%); animation: pv-barwave 3s ease-in-out infinite; }
+   @keyframes pv-barwave { 0%{ transform: scaleY(.35) } 50%{ transform: scaleY(.95) } 100%{ transform: scaleY(.55) } }
+*/
