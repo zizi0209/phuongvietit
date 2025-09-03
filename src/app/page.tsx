@@ -1,6 +1,6 @@
 import SectionAnchor from "@/components/layout/SectionAnchor";
 import HeroSection from "@/components/sections/HeroSection";
-import StatsSection from "@/components/sections/StatsSection";
+//import StatsSection from "@/components/sections/StatsSection";
 import BusinessPainPointsSection from "@/components/sections/BusinessPainPointsSection";
 import ChallengesSolutionSection from "@/components/sections/ChallengesSolutionSection";
 import ERPPreviewSection from "@/components/sections/ERPPreviewSection";

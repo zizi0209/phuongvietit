@@ -4,7 +4,7 @@ import Link from "next/link";
 import Section from "@/components/layout/Section";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+//import { ArrowRight } from "lucide-react";
 
 export default function HeroSection() {
   return (
