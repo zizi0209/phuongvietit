@@ -148,9 +148,13 @@ export default function Header() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-80">
+            <SheetContent
+              side="right"
+              className="w-80 p-0 !bg-white text-foreground shadow-2xl ring-1 ring-black/5
+             [background-image:linear-gradient(135deg,rgba(47,168,76,.06),rgba(203,234,58,.06))]"
+            >
               <SheetHeader>
-                <SheetTitle className="flex items-center gap-2">
+                <SheetTitle className="p-5 flex items-center gap-2">
                   <AppImage
                     src="/logo.png"
                     alt="PV-ERP"
