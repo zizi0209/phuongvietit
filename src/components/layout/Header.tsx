@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+//import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import AppImage from "@/components/ui/AppImage";
 
 const NAV = [
   { id: "gioi-thieu", label: "Giới thiệu" },
@@ -115,7 +116,7 @@ export default function Header() {
           className="flex items-center gap-2"
           aria-label="PV-ERP"
         >
-          <Image
+          <AppImage
             src="/logo.png"
             alt="PV-ERP"
             width={58}
@@ -150,7 +151,7 @@ export default function Header() {
             <SheetContent side="right" className="w-80">
               <SheetHeader>
                 <SheetTitle className="flex items-center gap-2">
-                  <Image
+                  <AppImage
                     src="/logo.png"
                     alt="PV-ERP"
                     width={22}

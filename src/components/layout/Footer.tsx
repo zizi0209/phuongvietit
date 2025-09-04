@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
+//import Image from "next/image";
 import Link from "next/link";
 import { Mail, Globe } from "lucide-react";
+import AppImage from "@/components/ui/AppImage";
 
 export default function Footer() {
   return (
@@ -38,7 +39,7 @@ export default function Footer() {
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
             {/* left: logo + tên công ty */}
             <div className="flex items-center gap-3">
-              <Image
+              <AppImage
                 src="/logo.png"
                 alt="PV-ERP"
                 width={40}

@@ -5,6 +5,7 @@ import Section from "@/components/layout/Section";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 //import { ArrowRight } from "lucide-react";
+import AppVideo from "@/components/ui/AppVideo";
 
 export default function HeroSection() {
   return (
@@ -31,7 +32,7 @@ export default function HeroSection() {
         <div className="order-1 lg:order-none lg:col-span-7 pv-ani-fade-up-2">
           <div className="pv-glass overflow-hidden">
             <div className="aspect-[16/9]">
-              <video
+              <AppVideo
                 className="h-full w-full object-cover"
                 poster="/hero-dashboard.png"
                 autoPlay
@@ -41,10 +42,12 @@ export default function HeroSection() {
                 controls={false}
                 preload="metadata"
                 aria-label="PV-ERP intro video"
-              >
-                <source src="/video_homepage.webm" type="video/webm" />
-                Trình duyệt của bạn không hỗ trợ video WebM.
-              </video>
+                sources={[
+                  { src: "/video_homepage.webm", type: "video/webm" },
+                  // bạn có thể thêm fallback mp4 nếu muốn:
+                  // { src: "/video_homepage.mp4", type: "video/mp4" },
+                ]}
+              />
             </div>
           </div>
 

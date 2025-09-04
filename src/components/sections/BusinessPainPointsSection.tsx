@@ -5,7 +5,8 @@ import Section from "@/components/layout/Section";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link2, Wallet, BarChart3, BrainCog } from "lucide-react";
-import Image from "next/image";
+//import Image from "next/image";
+import AppImage from "@/components/ui/AppImage";
 
 type PainItem = {
   key: string;
@@ -140,7 +141,7 @@ function ActivePainPanel({
 
         <div className="mt-5 overflow-hidden rounded-xl border bg-white/60">
           <div className="aspect-[16/9]">
-            <Image
+            <AppImage
               width={1920}
               height={1080}
               src={
@@ -241,7 +242,7 @@ function MobilePainCard({
         {/* Media on top */}
         <div className="overflow-hidden border-b bg-white/60">
           <div className="aspect-[16/9]">
-            <Image
+            <AppImage
               width={1920}
               height={1080}
               src={
