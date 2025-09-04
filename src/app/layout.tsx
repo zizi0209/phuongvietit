@@ -2,6 +2,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import GlobalWaves from "@/components/decor/GlobalWaves";
+import ContactWidget from "@/components/widgets/ContactWidget";
 
 export const metadata = {
   title: "PV-ERP | Giải pháp ERP hiện đại",
@@ -25,6 +26,12 @@ export default function RootLayout({
         <main className="relative">{children}</main>
 
         <Footer />
+        {/* Widget liên hệ nhanh */}
+        <ContactWidget
+          phoneNumber="0706780790"
+          zaloUrl="https://zalo.me/0706780790"
+          messengerUrl="https://m.me/phuongvietit.vn"
+        />
       </body>
     </html>
   );
