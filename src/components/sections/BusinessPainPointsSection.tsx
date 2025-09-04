@@ -141,10 +141,14 @@ function ActivePainPanel({
         <div className="mt-5 overflow-hidden rounded-xl border bg-white/60">
           <div className="aspect-[16/9]">
             <Image
-            width={1920}
-            height={1080}
-              src={item.media.src}
-              alt={item.media.alt}
+              width={1920}
+              height={1080}
+              src={
+                item.media.src.startsWith("/")
+                  ? item.media.src
+                  : `/${item.media.src}`
+              }
+              alt={item.media.alt ?? ""}
               className="h-full w-full object-cover"
               loading="lazy"
             />
@@ -238,10 +242,14 @@ function MobilePainCard({
         <div className="overflow-hidden border-b bg-white/60">
           <div className="aspect-[16/9]">
             <Image
-            width={1920}
-            height={1080}
-              src={item.media.src}
-              alt={item.media.alt}
+              width={1920}
+              height={1080}
+              src={
+                item.media.src.startsWith("/")
+                  ? item.media.src
+                  : `/${item.media.src}`
+              }
+              alt={item.media.alt ?? ""}
               className="h-full w-full object-cover"
               loading="lazy"
             />

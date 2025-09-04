@@ -25,15 +25,15 @@ jobs:
           cache: 'npm'
 
       - run: npm ci
-      - run: npm run build   # tạo thư mục out/
+      - run: npm run build             # -> tạo thư mục out/
 
-      - name: Add .nojekyll (avoid Jekyll processing)
+      - name: Add .nojekyll
         run: touch ./out/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out     # Next.js export ra thư mục out/
+          path: ./out
 
   deploy:
     needs: build

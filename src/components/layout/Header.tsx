@@ -122,6 +122,7 @@ export default function Header() {
             height={58}
             className="h-13 w-13"
             priority
+            unoptimized
           />
           <span className="text-base font-bold tracking-tight">PV-ERP</span>
         </a>
@@ -155,6 +156,7 @@ export default function Header() {
                     width={22}
                     height={22}
                     className="h-6 w-6"
+                    unoptimized
                   />
                   PV-ERP
                 </SheetTitle>

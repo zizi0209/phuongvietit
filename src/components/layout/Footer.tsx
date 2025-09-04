@@ -45,6 +45,7 @@ export default function Footer() {
                 height={40}
                 className="h-10 w-10 rounded-sm bg-white/5"
                 priority
+                unoptimized
               />
               <h3 className="text-xs font-bold uppercase tracking-wider md:text-sm">
                 CÔNG TY TNHH CÔNG NGHỆ THÔNG TIN VÀ MÔI TRƯỜNG PHƯƠNG VIỆT
