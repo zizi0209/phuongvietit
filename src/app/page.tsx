@@ -7,7 +7,6 @@ import ERPPreviewSection from "@/components/sections/ERPPreviewSection";
 import KeyFeaturesSection from "@/components/sections/KeyFeaturesSection";
 import BenefitsSection from "@/components/sections/BenefitsSection";
 import QuickCTASection from "@/components/sections/QuickCTASection";
-import ContactForm from "@/components/sections/ContactForm";
 import ContactInfo from "@/components/sections/ContactInfo";
 import ImplementationTimelineSection from "@/components/sections/ImplementationTimelineSection";
 
@@ -16,8 +15,7 @@ export default function LandingPage() {
     <>
       <SectionAnchor id="gioi-thieu" />
       <HeroSection />
-      {/* <StatsSection /> */}
-
+      
       <SectionAnchor id="dat-van-de" />
       <BusinessPainPointsSection />
 
@@ -33,7 +31,7 @@ export default function LandingPage() {
       <SectionAnchor id="loi-ich" />
       <BenefitsSection />
 
-      <ImplementationTimelineSection/>
+      <ImplementationTimelineSection />
 
       <SectionAnchor id="lien-he" />
       <QuickCTASection />

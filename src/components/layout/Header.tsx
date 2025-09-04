@@ -1,8 +1,16 @@
 "use client";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
 const NAV = [
   { id: "gioi-thieu", label: "Giới thiệu" },
@@ -15,53 +23,155 @@ const NAV = [
 ];
 
 export default function Header() {
-  const [active, setActive] = useState("gioi-thieu");
+  const [active, setActive] = useState<string>("gioi-thieu");
+  const [open, setOpen] = useState(false);
 
-  const onClick = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
+  // theo dõi section đang xem
   useEffect(() => {
-    const sections = NAV.map((n) => document.getElementById(n.id)).filter(
-      Boolean
-    ) as HTMLElement[];
-    if (!sections.length) return;
-    const obs = new IntersectionObserver(
+    const sel = NAV.map((n) => `#${n.id}`).join(",");
+    const els = Array.from(document.querySelectorAll<HTMLElement>(sel));
+    if (!els.length) return;
+
+    const io = new IntersectionObserver(
       (entries) => {
-        entries.forEach((en) => en.isIntersecting && setActive(en.target.id));
+        // entry chiếm tỉ lệ hiển thị cao nhất sẽ được active
+        const vis = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (vis?.target?.id) setActive(vis.target.id);
       },
-      { threshold: 0.4, rootMargin: "-80px 0px -40% 0px" }
+      {
+        // bù header 72px và nhấn mạnh vùng giữa viewport
+        rootMargin: "-72px 0px -65% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
     );
-    sections.forEach((s) => obs.observe(s));
-    return () => obs.disconnect();
+
+    els.forEach((el) => io.observe(el));
+
+    // fallback: khi ở rất gần đầu trang, luôn set "gioi-thieu"
+    const onScroll = () => {
+      if (window.scrollY < 6) setActive("gioi-thieu");
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
+  const onGo = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (!el) return;
+    // cuộn mượt; nhờ scroll-padding-top 72px nên "tới" rất chuẩn
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    // feedback underline tức thời để người dùng thấy đang chọn
+    setActive(id);
+  };
+
+  const NavItems = useMemo(
+    () => (
+      <>
+        {NAV.map((item) => (
+          <a
+            key={item.id}
+            href={`#${item.id}`}
+            onClick={onGo(item.id)}
+            data-active={active === item.id}
+            className="
+              relative px-3 py-2 text-sm font-medium text-foreground/80 transition
+              hover:text-foreground
+              after:pointer-events-none after:absolute after:inset-x-2 after:-bottom-0.5 after:h-[3px]
+              after:origin-left after:scale-x-0 after:rounded-full
+              after:bg-[linear-gradient(90deg,var(--brand-green),var(--brand-lime))]
+              after:transition-transform after:duration-300
+              hover:after:scale-x-100
+              data-[active=true]:text-foreground data-[active=true]:after:scale-x-100
+            "
+          >
+            {item.label}
+          </a>
+        ))}
+      </>
+    ),
+    [active]
+  );
+
   return (
-    <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
-      <div className="container mx-auto container-padding h-16 flex items-center justify-between">
-        <Link href="/" className="font-bold text-lg flex items-center gap-2">
-          <Image src="/logo.png" alt="PV-ERP" width={60} height={85} className="h-6 w-auto" />
-          <span>PV-ERP</span>
-        </Link>
-        <nav className="hidden md:flex items-center gap-2">
-          {NAV.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={(e) => onClick(e, item.id)}
-              className={cn(
-                "px-3 py-2 rounded-full text-sm transition-colors",
-                active === item.id
-                  ? "bg-[hsl(var(--primary))] text-white"
-                  : "text-muted-foreground hover:bg-muted"
-              )}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+    <header
+      className="
+        sticky top-0 z-50 w-full border-b border-border/60 bg-white/80 backdrop-blur
+        supports-[backdrop-filter]:bg-white/60
+      "
+    >
+      <div className="container container-padding mx-auto flex h-26 items-center justify-between">
+        {/* logo + brand */}
+        <a
+          href="#gioi-thieu"
+          onClick={onGo("gioi-thieu")}
+          className="flex items-center gap-2"
+          aria-label="PV-ERP"
+        >
+          <Image
+            src="/logo.png"
+            alt="PV-ERP"
+            width={58}
+            height={58}
+            className="h-13 w-13"
+            priority
+          />
+          <span className="text-base font-bold tracking-tight">PV-ERP</span>
+        </a>
+
+        {/* desktop nav */}
+        <nav className="hidden items-center gap-1 md:flex">{NavItems}</nav>
+
+        {/* CTA */}
+        {/* <div className="hidden md:block">
+          <a href="#lien-he" onClick={onGo("lien-he")}>
+            <Button className="btn-cta-gradient h-9 rounded-full px-4 text-sm font-semibold shadow">
+              Đăng ký demo
+            </Button>
+          </a>
+        </div> */}
+
+        {/* mobile menu */}
+        <div className="md:hidden">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="h-9 w-9">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-80">
+              <SheetHeader>
+                <SheetTitle className="flex items-center gap-2">
+                  <Image
+                    src="/logo.png"
+                    alt="PV-ERP"
+                    width={22}
+                    height={22}
+                    className="h-6 w-6"
+                  />
+                  PV-ERP
+                </SheetTitle>
+              </SheetHeader>
+
+              <div className="mt-6 grid gap-1">{NavItems}</div>
+
+              {/* <div className="mt-6">
+                <a href="#lien-he" onClick={onGo("lien-he")}>
+                  <Button className="btn-cta-gradient h-10 w-full rounded-full font-semibold">
+                    Đăng ký demo
+                  </Button>
+                </a>
+              </div> */}
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

@@ -439,3 +439,29 @@ html { scroll-behavior: smooth; }
       color-mix(in oklab, var(--brand-green) 12%, transparent) 0, transparent 64%),
     var(--background);
 }
+
+/* thêm vào globals.css nếu muốn */
+footer .shadow-top-soft { box-shadow: 0 -6px 24px rgba(0,0,0,.08) inset; }
+
+/* trước bạn đã có smooth */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px; /* khớp với header */
+}
+
+/* animation tinh tế + respect reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes pv-weave-pan {
+    0% { transform: translateX(0) }
+    50% { transform: translateX(4%) }
+    100% { transform: translateX(0) }
+  }
+  @keyframes pv-weave-pan-slow {
+    0% { transform: translateX(0) }
+    50% { transform: translateX(2.6%) }
+    100% { transform: translateX(0) }
+  }
+  .animate-pv-weave-pan { animation: pv-weave-pan 26s ease-in-out infinite; }
+  .animate-pv-weave-pan-slow { animation: pv-weave-pan-slow 32s ease-in-out infinite; }
+}
+

@@ -32,7 +32,7 @@ const ITEMS: PainItem[] = [
     title: "Khó kiểm soát chi phí, hàng tồn kho, dòng tiền.",
     hint: "Vốn bị giam, chi phí phát sinh, vòng quay chậm.",
     media: {
-      src: "/PainItem/pain-cost.jpg",
+      src: "/PainItem/pain-cost.png",
       alt: "Minh hoạ chi phí & tồn kho",
     },
   },
@@ -42,7 +42,7 @@ const ITEMS: PainItem[] = [
     title: "Báo cáo chậm, thiếu số liệu thời gian thực.",
     hint: "Ra quyết định trễ, lệ thuộc file thủ công.",
     media: {
-      src: "/PainItem/pain-reporting.png",
+      src: "/PainItem/pain-reporting.webp",
       alt: "Minh hoạ báo cáo chậm",
     },
   },
